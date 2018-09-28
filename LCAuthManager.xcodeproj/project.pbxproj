@@ -1,0 +1,695 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		21BFC798215C836800F146DB /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 21BFC797215C836800F146DB /* AppDelegate.m */; };
+		21BFC79B215C836800F146DB /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 21BFC79A215C836800F146DB /* ViewController.m */; };
+		21BFC79E215C836800F146DB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 21BFC79C215C836800F146DB /* Main.storyboard */; };
+		21BFC7A0215C837300F146DB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 21BFC79F215C837300F146DB /* Assets.xcassets */; };
+		21BFC7A3215C837300F146DB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 21BFC7A1215C837300F146DB /* LaunchScreen.storyboard */; };
+		21BFC7A6215C837300F146DB /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 21BFC7A5215C837300F146DB /* main.m */; };
+		21BFC7B0215C837400F146DB /* LCAuthManagerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 21BFC7AF215C837400F146DB /* LCAuthManagerTests.m */; };
+		21BFC7BB215C837400F146DB /* LCAuthManagerUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 21BFC7BA215C837400F146DB /* LCAuthManagerUITests.m */; };
+		21BFC7D6215C86E100F146DB /* LCGestureAuthViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 21BFC7CB215C86E100F146DB /* LCGestureAuthViewController.m */; };
+		21BFC7D7215C86E100F146DB /* LCGestureAuthIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 21BFC7CF215C86E100F146DB /* LCGestureAuthIndicator.m */; };
+		21BFC7D8215C86E100F146DB /* LCGestureTouchArea.m in Sources */ = {isa = PBXBuildFile; fileRef = 21BFC7D1215C86E100F146DB /* LCGestureTouchArea.m */; };
+		21BFC7D9215C86E100F146DB /* LCGestureAuthPassword.m in Sources */ = {isa = PBXBuildFile; fileRef = 21BFC7D4215C86E100F146DB /* LCGestureAuthPassword.m */; };
+		21BFC7DA215C86E100F146DB /* LCGestureAuthViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 21BFC7D5215C86E100F146DB /* LCGestureAuthViewController.xib */; };
+		21BFC7E1215CAB3900F146DB /* LCAuthManagerConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 21BFC7E0215CAB3900F146DB /* LCAuthManagerConfig.m */; };
+		21BFC7E5215CB38100F146DB /* LCBiometricsAuthManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 21BFC7E3215CB38100F146DB /* LCBiometricsAuthManager.m */; };
+		21BFC7E8215CBBE300F146DB /* LCAuthManager.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 21BFC7E7215CBBE300F146DB /* LCAuthManager.bundle */; };
+		21BFC7EC215CCA0B00F146DB /* LCAuthManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 21BFC7EB215CCA0B00F146DB /* LCAuthManager.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		21BFC7AC215C837400F146DB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 21BFC78B215C836800F146DB /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 21BFC792215C836800F146DB;
+			remoteInfo = LCAuthManager;
+		};
+		21BFC7B7215C837400F146DB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 21BFC78B215C836800F146DB /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 21BFC792215C836800F146DB;
+			remoteInfo = LCAuthManager;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		21BFC793215C836800F146DB /* LCAuthManager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LCAuthManager.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		21BFC796215C836800F146DB /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		21BFC797215C836800F146DB /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		21BFC799215C836800F146DB /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		21BFC79A215C836800F146DB /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		21BFC79D215C836800F146DB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		21BFC79F215C837300F146DB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		21BFC7A2215C837300F146DB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		21BFC7A4215C837300F146DB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		21BFC7A5215C837300F146DB /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		21BFC7AB215C837400F146DB /* LCAuthManagerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LCAuthManagerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		21BFC7AF215C837400F146DB /* LCAuthManagerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LCAuthManagerTests.m; sourceTree = "<group>"; };
+		21BFC7B1215C837400F146DB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		21BFC7B6215C837400F146DB /* LCAuthManagerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LCAuthManagerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		21BFC7BA215C837400F146DB /* LCAuthManagerUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LCAuthManagerUITests.m; sourceTree = "<group>"; };
+		21BFC7BC215C837400F146DB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		21BFC7CA215C86E100F146DB /* LCGestureAuthViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LCGestureAuthViewController.h; sourceTree = "<group>"; };
+		21BFC7CB215C86E100F146DB /* LCGestureAuthViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LCGestureAuthViewController.m; sourceTree = "<group>"; };
+		21BFC7CF215C86E100F146DB /* LCGestureAuthIndicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LCGestureAuthIndicator.m; sourceTree = "<group>"; };
+		21BFC7D0215C86E100F146DB /* LCGestureAuthPassword.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LCGestureAuthPassword.h; sourceTree = "<group>"; };
+		21BFC7D1215C86E100F146DB /* LCGestureTouchArea.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LCGestureTouchArea.m; sourceTree = "<group>"; };
+		21BFC7D2215C86E100F146DB /* LCGestureAuthIndicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LCGestureAuthIndicator.h; sourceTree = "<group>"; };
+		21BFC7D3215C86E100F146DB /* LCGestureTouchArea.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LCGestureTouchArea.h; sourceTree = "<group>"; };
+		21BFC7D4215C86E100F146DB /* LCGestureAuthPassword.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LCGestureAuthPassword.m; sourceTree = "<group>"; };
+		21BFC7D5215C86E100F146DB /* LCGestureAuthViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LCGestureAuthViewController.xib; sourceTree = "<group>"; };
+		21BFC7DB215C870600F146DB /* LCAuthManagerConstant.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LCAuthManagerConstant.h; sourceTree = "<group>"; };
+		21BFC7DF215CAB3900F146DB /* LCAuthManagerConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LCAuthManagerConfig.h; sourceTree = "<group>"; };
+		21BFC7E0215CAB3900F146DB /* LCAuthManagerConfig.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LCAuthManagerConfig.m; sourceTree = "<group>"; };
+		21BFC7E3215CB38100F146DB /* LCBiometricsAuthManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LCBiometricsAuthManager.m; sourceTree = "<group>"; };
+		21BFC7E4215CB38100F146DB /* LCBiometricsAuthManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LCBiometricsAuthManager.h; sourceTree = "<group>"; };
+		21BFC7E7215CBBE300F146DB /* LCAuthManager.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = LCAuthManager.bundle; sourceTree = "<group>"; };
+		21BFC7EA215CCA0B00F146DB /* LCAuthManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LCAuthManager.h; sourceTree = "<group>"; };
+		21BFC7EB215CCA0B00F146DB /* LCAuthManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LCAuthManager.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		21BFC790215C836800F146DB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		21BFC7A8215C837400F146DB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		21BFC7B3215C837400F146DB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		21BFC78A215C836800F146DB = {
+			isa = PBXGroup;
+			children = (
+				21BFC795215C836800F146DB /* LCAuthManager */,
+				21BFC7AE215C837400F146DB /* LCAuthManagerTests */,
+				21BFC7B9215C837400F146DB /* LCAuthManagerUITests */,
+				21BFC794215C836800F146DB /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		21BFC794215C836800F146DB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				21BFC793215C836800F146DB /* LCAuthManager.app */,
+				21BFC7AB215C837400F146DB /* LCAuthManagerTests.xctest */,
+				21BFC7B6215C837400F146DB /* LCAuthManagerUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		21BFC795215C836800F146DB /* LCAuthManager */ = {
+			isa = PBXGroup;
+			children = (
+				21BFC7C8215C868F00F146DB /* LCAuthManager */,
+				21BFC796215C836800F146DB /* AppDelegate.h */,
+				21BFC797215C836800F146DB /* AppDelegate.m */,
+				21BFC799215C836800F146DB /* ViewController.h */,
+				21BFC79A215C836800F146DB /* ViewController.m */,
+				21BFC79C215C836800F146DB /* Main.storyboard */,
+				21BFC79F215C837300F146DB /* Assets.xcassets */,
+				21BFC7A1215C837300F146DB /* LaunchScreen.storyboard */,
+				21BFC7A4215C837300F146DB /* Info.plist */,
+				21BFC7A5215C837300F146DB /* main.m */,
+			);
+			path = LCAuthManager;
+			sourceTree = "<group>";
+		};
+		21BFC7AE215C837400F146DB /* LCAuthManagerTests */ = {
+			isa = PBXGroup;
+			children = (
+				21BFC7AF215C837400F146DB /* LCAuthManagerTests.m */,
+				21BFC7B1215C837400F146DB /* Info.plist */,
+			);
+			path = LCAuthManagerTests;
+			sourceTree = "<group>";
+		};
+		21BFC7B9215C837400F146DB /* LCAuthManagerUITests */ = {
+			isa = PBXGroup;
+			children = (
+				21BFC7BA215C837400F146DB /* LCAuthManagerUITests.m */,
+				21BFC7BC215C837400F146DB /* Info.plist */,
+			);
+			path = LCAuthManagerUITests;
+			sourceTree = "<group>";
+		};
+		21BFC7C8215C868F00F146DB /* LCAuthManager */ = {
+			isa = PBXGroup;
+			children = (
+				21D32B42215DA96D00A2D7C6 /* Tools */,
+				21BFC7E6215CBBB100F146DB /* Resources */,
+				21BFC7E2215CB36100F146DB /* BiometricsAuthSupport */,
+				21BFC7C9215C86AC00F146DB /* GestureAuthSupport */,
+				21BFC7DB215C870600F146DB /* LCAuthManagerConstant.h */,
+				21BFC7DF215CAB3900F146DB /* LCAuthManagerConfig.h */,
+				21BFC7E0215CAB3900F146DB /* LCAuthManagerConfig.m */,
+				21BFC7EA215CCA0B00F146DB /* LCAuthManager.h */,
+				21BFC7EB215CCA0B00F146DB /* LCAuthManager.m */,
+			);
+			path = LCAuthManager;
+			sourceTree = "<group>";
+		};
+		21BFC7C9215C86AC00F146DB /* GestureAuthSupport */ = {
+			isa = PBXGroup;
+			children = (
+				21D32B46215DAA0200A2D7C6 /* Model */,
+				21BFC7CA215C86E100F146DB /* LCGestureAuthViewController.h */,
+				21BFC7CB215C86E100F146DB /* LCGestureAuthViewController.m */,
+				21BFC7D5215C86E100F146DB /* LCGestureAuthViewController.xib */,
+				21BFC7CE215C86E100F146DB /* View */,
+			);
+			path = GestureAuthSupport;
+			sourceTree = "<group>";
+		};
+		21BFC7CE215C86E100F146DB /* View */ = {
+			isa = PBXGroup;
+			children = (
+				21BFC7D2215C86E100F146DB /* LCGestureAuthIndicator.h */,
+				21BFC7CF215C86E100F146DB /* LCGestureAuthIndicator.m */,
+				21BFC7D3215C86E100F146DB /* LCGestureTouchArea.h */,
+				21BFC7D1215C86E100F146DB /* LCGestureTouchArea.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		21BFC7E2215CB36100F146DB /* BiometricsAuthSupport */ = {
+			isa = PBXGroup;
+			children = (
+				21BFC7E4215CB38100F146DB /* LCBiometricsAuthManager.h */,
+				21BFC7E3215CB38100F146DB /* LCBiometricsAuthManager.m */,
+			);
+			path = BiometricsAuthSupport;
+			sourceTree = "<group>";
+		};
+		21BFC7E6215CBBB100F146DB /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				21BFC7E7215CBBE300F146DB /* LCAuthManager.bundle */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		21D32B42215DA96D00A2D7C6 /* Tools */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Tools;
+			sourceTree = "<group>";
+		};
+		21D32B46215DAA0200A2D7C6 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				21BFC7D0215C86E100F146DB /* LCGestureAuthPassword.h */,
+				21BFC7D4215C86E100F146DB /* LCGestureAuthPassword.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		21BFC792215C836800F146DB /* LCAuthManager */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 21BFC7BF215C837400F146DB /* Build configuration list for PBXNativeTarget "LCAuthManager" */;
+			buildPhases = (
+				21BFC78F215C836800F146DB /* Sources */,
+				21BFC790215C836800F146DB /* Frameworks */,
+				21BFC791215C836800F146DB /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = LCAuthManager;
+			productName = LCAuthManager;
+			productReference = 21BFC793215C836800F146DB /* LCAuthManager.app */;
+			productType = "com.apple.product-type.application";
+		};
+		21BFC7AA215C837400F146DB /* LCAuthManagerTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 21BFC7C2215C837400F146DB /* Build configuration list for PBXNativeTarget "LCAuthManagerTests" */;
+			buildPhases = (
+				21BFC7A7215C837400F146DB /* Sources */,
+				21BFC7A8215C837400F146DB /* Frameworks */,
+				21BFC7A9215C837400F146DB /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				21BFC7AD215C837400F146DB /* PBXTargetDependency */,
+			);
+			name = LCAuthManagerTests;
+			productName = LCAuthManagerTests;
+			productReference = 21BFC7AB215C837400F146DB /* LCAuthManagerTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		21BFC7B5215C837400F146DB /* LCAuthManagerUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 21BFC7C5215C837400F146DB /* Build configuration list for PBXNativeTarget "LCAuthManagerUITests" */;
+			buildPhases = (
+				21BFC7B2215C837400F146DB /* Sources */,
+				21BFC7B3215C837400F146DB /* Frameworks */,
+				21BFC7B4215C837400F146DB /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				21BFC7B8215C837400F146DB /* PBXTargetDependency */,
+			);
+			name = LCAuthManagerUITests;
+			productName = LCAuthManagerUITests;
+			productReference = 21BFC7B6215C837400F146DB /* LCAuthManagerUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		21BFC78B215C836800F146DB /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = LC;
+				LastUpgradeCheck = 1000;
+				ORGANIZATIONNAME = coderap;
+				TargetAttributes = {
+					21BFC792215C836800F146DB = {
+						CreatedOnToolsVersion = 10.0;
+					};
+					21BFC7AA215C837400F146DB = {
+						CreatedOnToolsVersion = 10.0;
+						TestTargetID = 21BFC792215C836800F146DB;
+					};
+					21BFC7B5215C837400F146DB = {
+						CreatedOnToolsVersion = 10.0;
+						TestTargetID = 21BFC792215C836800F146DB;
+					};
+				};
+			};
+			buildConfigurationList = 21BFC78E215C836800F146DB /* Build configuration list for PBXProject "LCAuthManager" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 21BFC78A215C836800F146DB;
+			productRefGroup = 21BFC794215C836800F146DB /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				21BFC792215C836800F146DB /* LCAuthManager */,
+				21BFC7AA215C837400F146DB /* LCAuthManagerTests */,
+				21BFC7B5215C837400F146DB /* LCAuthManagerUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		21BFC791215C836800F146DB /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				21BFC7A3215C837300F146DB /* LaunchScreen.storyboard in Resources */,
+				21BFC7DA215C86E100F146DB /* LCGestureAuthViewController.xib in Resources */,
+				21BFC7E8215CBBE300F146DB /* LCAuthManager.bundle in Resources */,
+				21BFC7A0215C837300F146DB /* Assets.xcassets in Resources */,
+				21BFC79E215C836800F146DB /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		21BFC7A9215C837400F146DB /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		21BFC7B4215C837400F146DB /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		21BFC78F215C836800F146DB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				21BFC7EC215CCA0B00F146DB /* LCAuthManager.m in Sources */,
+				21BFC7D7215C86E100F146DB /* LCGestureAuthIndicator.m in Sources */,
+				21BFC7E1215CAB3900F146DB /* LCAuthManagerConfig.m in Sources */,
+				21BFC79B215C836800F146DB /* ViewController.m in Sources */,
+				21BFC7E5215CB38100F146DB /* LCBiometricsAuthManager.m in Sources */,
+				21BFC7D6215C86E100F146DB /* LCGestureAuthViewController.m in Sources */,
+				21BFC7D9215C86E100F146DB /* LCGestureAuthPassword.m in Sources */,
+				21BFC7D8215C86E100F146DB /* LCGestureTouchArea.m in Sources */,
+				21BFC7A6215C837300F146DB /* main.m in Sources */,
+				21BFC798215C836800F146DB /* AppDelegate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		21BFC7A7215C837400F146DB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				21BFC7B0215C837400F146DB /* LCAuthManagerTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		21BFC7B2215C837400F146DB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				21BFC7BB215C837400F146DB /* LCAuthManagerUITests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		21BFC7AD215C837400F146DB /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 21BFC792215C836800F146DB /* LCAuthManager */;
+			targetProxy = 21BFC7AC215C837400F146DB /* PBXContainerItemProxy */;
+		};
+		21BFC7B8215C837400F146DB /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 21BFC792215C836800F146DB /* LCAuthManager */;
+			targetProxy = 21BFC7B7215C837400F146DB /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		21BFC79C215C836800F146DB /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				21BFC79D215C836800F146DB /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		21BFC7A1215C837300F146DB /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				21BFC7A2215C837300F146DB /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		21BFC7BD215C837400F146DB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		21BFC7BE215C837400F146DB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		21BFC7C0215C837400F146DB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = 4EJJSBWCAH;
+				INFOPLIST_FILE = LCAuthManager/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.coderap.auth;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = ceb_development_20180716;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		21BFC7C1215C837400F146DB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = "";
+				INFOPLIST_FILE = LCAuthManager/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.coderap.auth;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		21BFC7C3215C837400F146DB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = LCAuthManagerTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.coderap.LCAuthManagerTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/LCAuthManager.app/LCAuthManager";
+			};
+			name = Debug;
+		};
+		21BFC7C4215C837400F146DB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = LCAuthManagerTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.coderap.LCAuthManagerTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/LCAuthManager.app/LCAuthManager";
+			};
+			name = Release;
+		};
+		21BFC7C6215C837400F146DB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = LCAuthManagerUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.coderap.LCAuthManagerUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = LCAuthManager;
+			};
+			name = Debug;
+		};
+		21BFC7C7215C837400F146DB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = LCAuthManagerUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.coderap.LCAuthManagerUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = LCAuthManager;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		21BFC78E215C836800F146DB /* Build configuration list for PBXProject "LCAuthManager" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				21BFC7BD215C837400F146DB /* Debug */,
+				21BFC7BE215C837400F146DB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		21BFC7BF215C837400F146DB /* Build configuration list for PBXNativeTarget "LCAuthManager" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				21BFC7C0215C837400F146DB /* Debug */,
+				21BFC7C1215C837400F146DB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		21BFC7C2215C837400F146DB /* Build configuration list for PBXNativeTarget "LCAuthManagerTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				21BFC7C3215C837400F146DB /* Debug */,
+				21BFC7C4215C837400F146DB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		21BFC7C5215C837400F146DB /* Build configuration list for PBXNativeTarget "LCAuthManagerUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				21BFC7C6215C837400F146DB /* Debug */,
+				21BFC7C7215C837400F146DB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 21BFC78B215C836800F146DB /* Project object */;
+}

@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Euh-ck-z8S">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="Szx-9l-qf0">
+            <objects>
+                <tableViewController hidesBottomBarWhenPushed="YES" useStoryboardIdentifierAsRestorationIdentifier="YES" id="boJ-fr-SmY" customClass="ViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="1" id="Jh5-Dw-cee">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="separatorColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        <sections>
+                            <tableViewSection id="fKf-GT-StT">
+                                <cells>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="50" id="NZh-C8-vFR">
+                                        <rect key="frame" x="0.0" y="35" width="375" height="50"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="NZh-C8-vFR" id="Zb0-Cq-K8B">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="49.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="手势密码" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CRr-lr-onx">
+                                                    <rect key="frame" x="15" y="16.5" width="56" height="17"/>
+                                                    <fontDescription key="fontDescription" name="DroidSansFallback" family="Droid Sans Fallback" pointSize="14"/>
+                                                    <color key="textColor" red="0.1960784314" green="0.1960784314" blue="0.1960784314" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="fLh-KS-j53">
+                                                    <rect key="frame" x="318" y="9.5" width="51" height="31"/>
+                                                    <connections>
+                                                        <action selector="gestureSwitch:" destination="boJ-fr-SmY" eventType="valueChanged" id="CoS-KF-reD"/>
+                                                    </connections>
+                                                </switch>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="CRr-lr-onx" firstAttribute="centerY" secondItem="Zb0-Cq-K8B" secondAttribute="centerY" id="8tR-HO-BBs"/>
+                                                <constraint firstAttribute="trailing" secondItem="fLh-KS-j53" secondAttribute="trailing" constant="8" id="CjS-4U-U9v"/>
+                                                <constraint firstItem="CRr-lr-onx" firstAttribute="leading" secondItem="Zb0-Cq-K8B" secondAttribute="leading" constant="15" id="HeX-Va-v4y"/>
+                                                <constraint firstItem="fLh-KS-j53" firstAttribute="centerY" secondItem="Zb0-Cq-K8B" secondAttribute="centerY" id="abw-OP-9Rc"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="50" id="fax-7C-gOp">
+                                        <rect key="frame" x="0.0" y="85" width="375" height="50"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="fax-7C-gOp" id="bwN-se-vzl">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="49.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="生物识别" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gp0-SU-uRw">
+                                                    <rect key="frame" x="15" y="16.5" width="56" height="17"/>
+                                                    <fontDescription key="fontDescription" name="DroidSansFallback" family="Droid Sans Fallback" pointSize="14"/>
+                                                    <color key="textColor" red="0.1960784314" green="0.1960784314" blue="0.1960784314" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="fEl-uh-kc4">
+                                                    <rect key="frame" x="318" y="9.5" width="51" height="31"/>
+                                                    <connections>
+                                                        <action selector="biometricsAuthSwitch:" destination="boJ-fr-SmY" eventType="valueChanged" id="M3n-9D-zwW"/>
+                                                    </connections>
+                                                </switch>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="fEl-uh-kc4" secondAttribute="trailing" constant="8" id="1ic-a5-DjT"/>
+                                                <constraint firstItem="gp0-SU-uRw" firstAttribute="leading" secondItem="bwN-se-vzl" secondAttribute="leading" constant="15" id="J7J-Lg-a9e"/>
+                                                <constraint firstItem="fEl-uh-kc4" firstAttribute="centerY" secondItem="bwN-se-vzl" secondAttribute="centerY" id="dB8-1D-Dnb"/>
+                                                <constraint firstItem="gp0-SU-uRw" firstAttribute="centerY" secondItem="bwN-se-vzl" secondAttribute="centerY" id="p0X-DR-fB4"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                            <tableViewSection id="SNt-gs-YVm">
+                                <cells>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="50" id="Pgi-A9-ub8">
+                                        <rect key="frame" x="0.0" y="146" width="375" height="50"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Pgi-A9-ub8" id="UNO-4J-xMf">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="49.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="修改手势密码" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sxp-gw-7cB">
+                                                    <rect key="frame" x="15" y="16.5" width="84" height="17"/>
+                                                    <fontDescription key="fontDescription" name="DroidSansFallback" family="Droid Sans Fallback" pointSize="14"/>
+                                                    <color key="textColor" red="0.1960784314" green="0.1960784314" blue="0.1960784314" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrow_right" translatesAutoresizingMaskIntoConstraints="NO" id="d4b-Ip-1XB">
+                                                    <rect key="frame" x="360" y="18.5" width="7" height="13"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="7" id="1Eh-dQ-pWB"/>
+                                                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="13" id="Gfw-Fd-e43"/>
+                                                        <constraint firstAttribute="height" constant="13" id="LRe-Qd-Peg"/>
+                                                        <constraint firstAttribute="width" relation="lessThanOrEqual" constant="7" id="P0w-fR-Kf4"/>
+                                                        <constraint firstAttribute="height" relation="lessThanOrEqual" constant="13" id="biD-K6-PEE"/>
+                                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="7" id="bnq-2b-RPq"/>
+                                                    </constraints>
+                                                </imageView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="d4b-Ip-1XB" secondAttribute="trailing" constant="8" id="2no-5N-vfh"/>
+                                                <constraint firstItem="Sxp-gw-7cB" firstAttribute="centerY" secondItem="UNO-4J-xMf" secondAttribute="centerY" id="S6n-CA-4eX"/>
+                                                <constraint firstItem="d4b-Ip-1XB" firstAttribute="centerY" secondItem="UNO-4J-xMf" secondAttribute="centerY" id="aB6-ZO-c0B"/>
+                                                <constraint firstItem="Sxp-gw-7cB" firstAttribute="leading" secondItem="UNO-4J-xMf" secondAttribute="leading" constant="15" id="gCp-Da-axK"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="50" id="B2Y-o4-si0">
+                                        <rect key="frame" x="0.0" y="196" width="375" height="50"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="B2Y-o4-si0" id="KZK-Xj-Qg8">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="49.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="忘记手势密码" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jUg-bg-eby">
+                                                    <rect key="frame" x="15" y="16.5" width="84" height="17"/>
+                                                    <fontDescription key="fontDescription" name="DroidSansFallback" family="Droid Sans Fallback" pointSize="14"/>
+                                                    <color key="textColor" red="0.1960784314" green="0.1960784314" blue="0.1960784314" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrow_right" translatesAutoresizingMaskIntoConstraints="NO" id="YRI-ZF-Tf4">
+                                                    <rect key="frame" x="360" y="18.5" width="7" height="13"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" relation="lessThanOrEqual" constant="13" id="3zl-kt-9UI"/>
+                                                        <constraint firstAttribute="width" constant="7" id="5xM-ZF-4ai"/>
+                                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="7" id="7Gs-Az-3I5"/>
+                                                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="13" id="CC3-OA-SYq"/>
+                                                        <constraint firstAttribute="height" constant="13" id="lI1-D0-YBH"/>
+                                                        <constraint firstAttribute="width" relation="lessThanOrEqual" constant="7" id="s7X-z2-kxm"/>
+                                                    </constraints>
+                                                </imageView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="YRI-ZF-Tf4" secondAttribute="trailing" constant="8" id="1Uo-Ne-eXO"/>
+                                                <constraint firstItem="jUg-bg-eby" firstAttribute="centerY" secondItem="KZK-Xj-Qg8" secondAttribute="centerY" id="5yw-NB-vdr"/>
+                                                <constraint firstItem="YRI-ZF-Tf4" firstAttribute="centerY" secondItem="KZK-Xj-Qg8" secondAttribute="centerY" id="cjg-wk-r4M"/>
+                                                <constraint firstItem="jUg-bg-eby" firstAttribute="leading" secondItem="KZK-Xj-Qg8" secondAttribute="leading" constant="15" id="iO1-xO-bka"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                        </sections>
+                        <connections>
+                            <outlet property="dataSource" destination="boJ-fr-SmY" id="agA-Sw-vdG"/>
+                            <outlet property="delegate" destination="boJ-fr-SmY" id="kUe-AJ-cPg"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="XWS-wg-ACz"/>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
+                    <connections>
+                        <outlet property="biometricsAuthSwitch" destination="fEl-uh-kc4" id="yCJ-Qn-vN4"/>
+                        <outlet property="biometricsLabel" destination="gp0-SU-uRw" id="z3g-R9-2WY"/>
+                        <outlet property="gestureSwitch" destination="fLh-KS-j53" id="xEl-nd-tWK"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4FO-90-Dm6" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="852" y="27"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="2dc-KO-sQP">
+            <objects>
+                <navigationController id="Euh-ck-z8S" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="" id="6Bk-Yc-DCn">
+                        <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="-1"/>
+                    </tabBarItem>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="gZ5-PW-m30">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="boJ-fr-SmY" kind="relationship" relationship="rootViewController" id="Aar-EH-WpF"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="KhM-5H-9kc" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-39" y="26"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="arrow_right" width="7" height="13"/>
+    </resources>
+</document>
