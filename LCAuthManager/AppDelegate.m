@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "LCAuthManager.h"
+#import "LCAuthManagerConfig.h"
 
 @interface AppDelegate ()<LCAuthManagerDelegate>
 
@@ -32,8 +33,12 @@
 
 
 - (void)applicationDidEnterBackground:(UIApplication *)application {
-    // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
-    // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+    /**
+     * 设置不验证的超时时间
+     * 设置这个时间之后，用户切出App，并在这个时间内切回不会有验证操作
+     * 使用场景：比如分享内容到其他App后切回本App，时间间隔很短，可以临时关闭验证
+     */
+    [LCAuthManager setCloseAuthTemporary:2];
 }
 
 
@@ -60,6 +65,7 @@
     LCGestureAuthViewController *gestureAuthViewController = nil;
     if ([LCAuthManager isGestureAuthOpened]) {
         UINavigationController *rootViewController = (UINavigationController *)self.window.rootViewController;
+        [LCAuthManager globalConfig].gestrueVCBackgroundImage = [UIImage imageNamed:@"background"];
         gestureAuthViewController = [LCAuthManager showGestureAuthViewControllerWithType:LCGestureAuthViewTypeCheck hostViewControllerView:rootViewController.topViewController delegate:self];
     }
     
@@ -124,14 +130,12 @@
     [self showAlert:@"达到最大次数"];
 }
 
-- (void)forgetGestureWithAuthController:(LCGestureAuthViewController *)gestureAuthViewController viewType:(LCGestureAuthViewType)viewType {
-    
-    [self showAlert:@"点击了忘记手势密码"];
-}
-
-- (void)useOtherAcountLoginWithAuthController:(LCGestureAuthViewController *)gestureAuthViewController viewType:(LCGestureAuthViewType)viewType {
-    
-    [self showAlert:@"使用其他账户登录"];
+- (void)assistOperationWithAuthController:(LCGestureAuthViewController *)gestureAuthViewController viewType:(LCGestureAuthViewType)viewType operationType:(NSInteger)operationType {
+    if (operationType == 0) {
+        [self showAlert:@"点击了忘记手势密码"];
+    } else {
+        [self showAlert:@"使用其他账户登录"];
+    }
 }
 
 #pragma mark - 提示信息

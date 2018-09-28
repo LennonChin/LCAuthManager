@@ -57,7 +57,9 @@ static NSTimeInterval _lockTime = 0.0;
 
 + (LCGestureAuthViewController *)showGestureAuthViewControllerWithType:(LCGestureAuthViewType)lockViewType hostViewControllerView:(UIViewController *)hostViewController delegate:(id<LCAuthManagerDelegate>)delegate {
     if (lockViewType == LCGestureAuthViewTypeCheck) {
-        if ([[NSDate date] timeIntervalSince1970] < _lockTime) {
+        NSTimeInterval nowTime = [[NSDate date] timeIntervalSince1970];
+        if (nowTime < _lockTime) {
+            LCLog(@"设置了超时时间：%f，当前时间：%f", _lockTime, nowTime);
             return nil;
         }
     }
@@ -70,12 +72,13 @@ static NSTimeInterval _lockTime = 0.0;
     return gestureAuthViewController;
 }
 
-+ (void)directlyforgetPassword {
++ (void)directlyTriggerAssistOperation:(NSInteger)operationType {
     // 通知代理
-    if ([LCAuthManager delegate] && [[LCAuthManager delegate] respondsToSelector:@selector(forgetGestureWithAuthController:viewType:)]) {
-        [[LCAuthManager delegate] forgetGestureWithAuthController:nil viewType:LCGestureAuthViewTypeUnknown];
+    if ([LCAuthManager delegate] && [[LCAuthManager delegate] respondsToSelector:@selector(assistOperationWithAuthController:viewType:operationType:)]) {
+        [[LCAuthManager delegate] assistOperationWithAuthController:nil viewType:LCGestureAuthViewTypeUnknown operationType:operationType];
     }
 }
+
 #pragma mark - 生物识别相关
 + (LCBiometricsType)isSupportBiometricsAuth {
     return [LCBiometricsAuthManager isSupportBiometricsAuth];
@@ -100,7 +103,9 @@ static NSTimeInterval _lockTime = 0.0;
                                   Fail:(void (^)(LCBiometricsAuthCheckResultType checkResultType, NSError *error))failBlock
                               Fallback:(void (^)(LCBiometricsAuthCheckResultType checkResultType, NSError *error))fallbackBlock
                               delegate:(id<LCAuthManagerDelegate>)delegate {
-    if ([[NSDate date] timeIntervalSince1970] < _lockTime) {
+    NSTimeInterval nowTime = [[NSDate date] timeIntervalSince1970];
+    if (nowTime < _lockTime) {
+        LCLog(@"设置了超时时间：%f，当前时间：%f", _lockTime, nowTime);
         return;
     }
     // 清除超时时间

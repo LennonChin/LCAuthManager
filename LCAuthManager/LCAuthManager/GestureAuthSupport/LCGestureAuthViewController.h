@@ -26,11 +26,8 @@
 /** 达到最大次数的Block回调 */
 @property (nonatomic, strong) void(^reachMaxRetryTimesBlock)(LCGestureAuthViewController *gestureAuthViewController, LCGestureAuthViewType viewType);
 
-/** 忘记手势密码的回调 */
-@property (nonatomic, strong) void(^forgetPasswordBlock)(LCGestureAuthViewController *gestureAuthViewController, LCGestureAuthViewType viewType);
-
-/** 使用其他账户登录的回调 */
-@property (nonatomic, strong) void(^useOtherAcountLoginBlock)(LCGestureAuthViewController *gestureAuthViewController, LCGestureAuthViewType viewType);
+/** 辅助按钮被点击的回调，operationType：0-第一个辅助按钮被点击，1-第二个辅助按钮被点击 */
+@property (nonatomic, strong) void(^assistOperationBlock)(LCGestureAuthViewController *gestureAuthViewController, LCGestureAuthViewType viewType, NSInteger operationType);
 
 /** 取消验证并关闭手势密码控制器 */
 - (void)cancelCheck;

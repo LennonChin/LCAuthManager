@@ -136,7 +136,7 @@
             
             // 修改手势密码
             if(window.rootViewController.presentingViewController == nil){
-                
+                [LCAuthManager globalConfig].useAssistOperations = YES;
                 [LCAuthManager showGestureAuthViewControllerWithType:LCGestureAuthViewTypeModify hostViewControllerView:self delegate:self];
                 
             }
@@ -144,7 +144,8 @@
         } else if (indexPath.row == 1) {
             
             // 忘记手势密码
-            [LCAuthManager directlyforgetPassword];
+            [LCAuthManager setDelegate:self];
+            [LCAuthManager directlyTriggerAssistOperation:0];
             
         }
         
@@ -159,9 +160,8 @@
         // 开启手势密码
         UIWindow *window = [UIApplication sharedApplication].keyWindow;
         if(window.rootViewController.presentingViewController == nil){
-            
+            [LCAuthManager globalConfig].useAssistOperations = NO;
             [LCAuthManager showGestureAuthViewControllerWithType:LCGestureAuthViewTypeCreate hostViewControllerView:self delegate:self];
-            
         }
         
     } else {
@@ -171,9 +171,8 @@
             
             UIWindow *window = [UIApplication sharedApplication].keyWindow;
             if(window.rootViewController.presentingViewController == nil) {
-                
+                [LCAuthManager globalConfig].useAssistOperations = YES;
                 [LCAuthManager showGestureAuthViewControllerWithType:LCGestureAuthViewTypeClean hostViewControllerView:self delegate:self];
-                
             }
             
         }
@@ -216,9 +215,9 @@
                     
                     // 提示
                     if (biometricsType == LCBiometricsTypeTouchID) {
-                        NSLog(@"开启指纹识别成功");
+                        [self showAlert:@"开启指纹识别成功"];
                     } else if (biometricsType == LCBiometricsTypeFaceID) {
-                        NSLog(@"开启面容识别成功");
+                        [self showAlert:@"开启面容识别成功"];
                     }
                     
                 } if (!sender.on) {
@@ -232,9 +231,9 @@
                     
                     // 提示
                     if (biometricsType == LCBiometricsTypeTouchID) {
-                        NSLog(@"关闭指纹识别成功");
+                        [self showAlert:@"关闭指纹识别成功"];
                     } else if (biometricsType == LCBiometricsTypeFaceID) {
-                        NSLog(@"关闭面容识别成功");
+                        [self showAlert:@"关闭面容识别成功"];
                     }
                 }
                 
@@ -265,7 +264,7 @@
         [self.tableView reloadData];
         
         // 提示
-        NSLog(@"操作出错，请重试");
+        [self showAlert:@"操作出错，请重试"];
         
     }
     
@@ -280,13 +279,13 @@
             
             _gestureSwitch.on = YES;
             
-            NSLog(@"创建手势密码成功");
+            [self showAlert:@"创建手势密码成功"];
             
         } else if (checkResultType == LCGestureAuthViewCheckResultFailed) {
             
             _gestureSwitch.on = NO;
             
-            NSLog(@"创建手势密码失败");
+            [self showAlert:@"创建手势密码失败"];
             
         } else if (checkResultType == LCGestureAuthViewCheckResultCancel) {
             
@@ -304,13 +303,13 @@
             // 顺便关闭生物识别
             [LCAuthPasswordManager persistBiometricsAuth:[LCBiometricsAuthManager isSupportBiometricsAuth] isOn:NO];
             
-            NSLog(@"清除手势密码成功");
+            [self showAlert:@"清除手势密码成功"];
             
         } else if (checkResultType == LCGestureAuthViewCheckResultFailed) {
             
             _gestureSwitch.on = YES;
             
-            NSLog(@"清除手势密码失败");
+            [self showAlert:@"清除手势密码失败"];
             
         } else if (checkResultType == LCGestureAuthViewCheckResultCancel) {
             
@@ -327,7 +326,7 @@
             
         } else if (checkResultType == LCGestureAuthViewCheckResultSuccess) {
             
-            NSLog(@"修改手势密码成功");
+            [self showAlert:@"修改手势密码成功"];
             
         } else if (checkResultType == LCGestureAuthViewCheckResultCancel) {
             
@@ -345,14 +344,12 @@
     [self showAlert:@"达到最大次数"];
 }
 
-- (void)forgetGestureWithAuthController:(LCGestureAuthViewController *)gestureAuthViewController viewType:(LCGestureAuthViewType)viewType {
-    
-    [self showAlert:@"点击了忘记手势密码"];
-}
-
-- (void)useOtherAcountLoginWithAuthController:(LCGestureAuthViewController *)gestureAuthViewController viewType:(LCGestureAuthViewType)viewType {
-    
-    [self showAlert:@"使用其他账户登录"];
+- (void)assistOperationWithAuthController:(LCGestureAuthViewController *)gestureAuthViewController viewType:(LCGestureAuthViewType)viewType operationType:(NSInteger)operationType {
+    if (operationType == 0) {
+        [self showAlert:@"点击了忘记手势密码"];
+    } else {
+        [self showAlert:@"使用其他账户登录"];
+    }
 }
 
 #pragma mark - 提示信息

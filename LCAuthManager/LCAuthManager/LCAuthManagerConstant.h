@@ -15,6 +15,8 @@
 #define LCLog(format, ...) /* */
 #endif
 
+
+
 // 判断系统版本是否大于等于8.0
 #define IOS_VERSION_8_OR_ABOVE (([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0)? (YES):(NO))
 
@@ -24,6 +26,14 @@
 // 屏幕尺寸
 #define ScreenHeight [[UIScreen mainScreen] bounds].size.height
 #define ScreenWidth [[UIScreen mainScreen] bounds].size.width
+
+// 屏幕比例缩放
+#define AutoResizeScaleX ([[UIScreen mainScreen] bounds].size.width / 320.0)
+#define AutoResizeScaleY ([[UIScreen mainScreen] bounds].size.height / 568.0)
+
+// 针对所有屏幕进行缩放操作
+#define AutoResizeX_All(value) (AutoResizeScaleX * value)
+#define AutoResizeY_All(value) (AutoResizeScaleY * value)
 
 #endif /* LCAuthManagerConstant_h */
 

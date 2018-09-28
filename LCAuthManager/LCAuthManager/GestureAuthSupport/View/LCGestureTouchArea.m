@@ -204,7 +204,7 @@
     // 生成密码串
     for (int i = 0; i < selectedButtonArray.count; i++) {
         strbutton = selectedButtonArray[i];
-        string = [string stringByAppendingFormat:@"%d",strbutton.tag - [LCAuthManager globalConfig].touchAreaCircleBaseTagNumber];
+        string = [string stringByAppendingFormat:@"%zd",strbutton.tag - [LCAuthManager globalConfig].touchAreaCircleBaseTagNumber];
     }
     
     // 清除到初始样式

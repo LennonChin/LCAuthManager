@@ -20,10 +20,8 @@
 - (void)gestureCheckState:(LCGestureAuthCheckResultType)checkResultType viewType:(LCGestureAuthViewType)viewType;
 /** 手势密码相关，达到最大次数代理方法 */
 - (void)gestureRetryReachMaxTimesWithAuthController:(LCGestureAuthViewController *)gestureAuthViewController viewType:(LCGestureAuthViewType)viewType;
-/** 手势密码相关，忘记手势密码的回调 */
-- (void)forgetGestureWithAuthController:(LCGestureAuthViewController *)gestureAuthViewController viewType:(LCGestureAuthViewType)viewType;
-/** 手势密码相关，使用其他账户登录的回调 */
-- (void)useOtherAcountLoginWithAuthController:(LCGestureAuthViewController *)gestureAuthViewController viewType:(LCGestureAuthViewType)viewType;
+/** 辅助操作相关，operationType：0-第一个辅助按钮被点击，1-第二个辅助按钮被点击 */
+- (void)assistOperationWithAuthController:(LCGestureAuthViewController *)gestureAuthViewController viewType:(LCGestureAuthViewType)viewType operationType:(NSInteger)operationType;
 
 #pragma mark - 生物识别相关
 /** 生物识别相关，针对某种验证的验证结果 */
@@ -54,7 +52,7 @@
  暂时关闭验证
  适用于如对外分享内容后返回App，此时应该暂时不用验证
 
- @param timeout 超时时间
+ @param timeout 超时时间，单位：秒
  */
 + (void)setCloseAuthTemporary:(NSTimeInterval)timeout;
 
@@ -73,8 +71,8 @@
  */
 + (LCGestureAuthViewController *)showGestureAuthViewControllerWithType:(LCGestureAuthViewType)lockViewType hostViewControllerView:(UIViewController *)hostViewController delegate:(id<LCAuthManagerDelegate>)delegate;
 
-/** 忘记手势密码 */
-+ (void)directlyforgetPassword;
+/** 主动触发辅助按钮的操作 */
++ (void)directlyTriggerAssistOperation:(NSInteger)operationType;
 
 #pragma mark - 生物识别相关
 /** 是否支持生物识别 */

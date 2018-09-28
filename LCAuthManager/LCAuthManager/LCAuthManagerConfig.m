@@ -22,6 +22,14 @@
     // 密码配置
     _gesturePasswordMinLength = 4;
     _maxGestureRetryTimes = 5;
+    _useBiometricsAuthAssist = YES;
+    // 整体样式
+    _logoImage = [UIImage imageNamed:@"LCAuthManager.bundle/logo"];
+    _gestrueVCbackgroundColor = [UIColor whiteColor];
+    _gestrueVCBackgroundImage = nil;
+    _useAssistOperations = YES;
+    _firstAssistButtonTitle = @"忘记手势密码";
+    _secondAssistButtonTitle = @"其他账户登录";
     // 指示器相关
     _normalTipColor = [UIColor colorWithRed:0.96 green:0.36 blue:0.37 alpha:1];
     _errorTipColor = [UIColor colorWithRed:245.0 / 255.0 green:67.0 / 255.0 blue:73.0 / 255.0 alpha:1.0];

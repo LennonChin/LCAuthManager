@@ -32,8 +32,22 @@
 @property (nonatomic, assign) NSInteger gesturePasswordMinLength;
 /** 最大重试次数 */
 @property (nonatomic, assign) NSInteger maxGestureRetryTimes;
+/** 是否使用生物识别辅助验证，默认使用 */
+@property (nonatomic, assign) BOOL useBiometricsAuthAssist;
+/** 手势密码页面是否显示辅助操作按钮，默认YES */
+@property (nonatomic, assign) BOOL useAssistOperations;
+/** 第一个辅助按钮的标题，默认为“忘记手势密码” */
+@property (nonatomic, strong) NSString *firstAssistButtonTitle;
+/** 第二个辅助按钮的标题，默认为“其他账户登录” */
+@property (nonatomic, strong) NSString *secondAssistButtonTitle;
 
 #pragma mark 样式配置
+/** 手势密码页面背景色，默认白色 */
+@property (nonatomic, strong) UIColor *gestrueVCbackgroundColor;
+/** 手势密码页面背景图，一旦设置将覆盖背景色，默认为空 */
+@property (nonatomic, strong) UIImage *gestrueVCBackgroundImage;
+/** Logo图片，默认为项目图标，如果设置了，在4.7寸以上（不包含4.7寸）大小的屏幕将显示 */
+@property (nonatomic, strong) UIImage *logoImage;
 /** 正常时提示文字的颜色 */
 @property (nonatomic, strong) UIColor *normalTipColor;
 /** 出错时提示文字的颜色 */

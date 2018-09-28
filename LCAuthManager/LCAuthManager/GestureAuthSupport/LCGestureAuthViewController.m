@@ -21,6 +21,8 @@
 
 @property (weak, nonatomic) IBOutlet UIImageView *preSnapImageView; // 上一界面截图
 @property (weak, nonatomic) IBOutlet UIImageView *currentSnapImageView; // 当前界面截图
+@property (weak, nonatomic) IBOutlet UIImageView *logoImageView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *logoTopCons;
 
 // 标题
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
@@ -46,11 +48,16 @@
 
 // 约束，用于适配小屏
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *closeButtonTopCons;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *titleTopCons;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *tipBottomCons;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *otherOperateTopCons;
-@property (weak, nonatomic) IBOutlet UIButton *forgetBtn;
-@property (weak, nonatomic) IBOutlet UIButton *useOtherBtn;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *touchAreaCenterYCons;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *otherOperateBottomCons;
+
+@property (weak, nonatomic) IBOutlet UIButton *useBiometricsAuthButton;
+@property (weak, nonatomic) IBOutlet UILabel *useBiometricsAuthLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *backgroundImageView;
+
+@property (weak, nonatomic) IBOutlet UIButton *firstAssistButton;
+@property (weak, nonatomic) IBOutlet UIButton *secondAssistButton;
+@property (weak, nonatomic) IBOutlet UIView *assistOperationsdivideLine;
 
 @property (weak, nonatomic) IBOutlet UIButton *closeBtn;
 
@@ -78,21 +85,78 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    // 适配小屏
-    if (ScreenHeight < 568.0) {
-        _titleTopCons.constant = 40;
-        _tipBottomCons.constant = 0;
-        _otherOperateTopCons.constant = 5;
-    }
-    
     _closeButtonTopCons.constant = [LCUtils isZeroBezel] ? 45 : 30;
     
-    self.indicatorView.backgroundColor = [UIColor clearColor];
-    self.touchAreaView.backgroundColor = [UIColor clearColor];
-    
+    self.view.backgroundColor = [LCAuthManager globalConfig].gestrueVCbackgroundColor;
+    self.backgroundImageView.image = [LCAuthManager globalConfig].gestrueVCBackgroundImage;
     [self.closeBtn setImage:[LCAuthManager globalConfig].closeGestureAuthButtonImage forState:UIControlStateNormal];
     
+    // 设置是否开启生物识别验证辅助
+    self.useBiometricsAuthButton.hidden = YES;
+    self.useBiometricsAuthLabel.hidden = YES;
+    if ([LCAuthManager globalConfig].useBiometricsAuthAssist) {
+        if ([LCAuthManager isSupportBiometricsAuth] == LCBiometricsTypeTouchID) {
+            self.useBiometricsAuthButton.hidden = NO;
+            self.useBiometricsAuthLabel.hidden = NO;
+            [self.useBiometricsAuthButton setImage:[UIImage imageNamed:@"LCAuthManager.bundle/touch_id"] forState:UIControlStateNormal];
+            [self.useBiometricsAuthLabel setText:@"使用指纹验证"];
+        } else if ([LCAuthManager isSupportBiometricsAuth] == LCBiometricsTypeFaceID) {
+            self.useBiometricsAuthButton.hidden = NO;
+            self.useBiometricsAuthLabel.hidden = NO;
+            [self.useBiometricsAuthButton setImage:[UIImage imageNamed:@"LCAuthManager.bundle/face_id"] forState:UIControlStateNormal];
+            [self.useBiometricsAuthLabel setText:@"使用面容验证"];
+        }
+    }
+    
+    // 辅助操作
+    if ([LCAuthManager globalConfig].useAssistOperations) {
+        self.firstAssistButton.hidden = NO;
+        self.secondAssistButton.hidden = NO;
+        self.assistOperationsdivideLine.hidden = NO;
+        [self.firstAssistButton setTitle:[LCAuthManager globalConfig].firstAssistButtonTitle forState:UIControlStateNormal];
+        [self.secondAssistButton setTitle:[LCAuthManager globalConfig].secondAssistButtonTitle forState:UIControlStateNormal];
+    } else {
+        self.firstAssistButton.hidden = YES;
+        self.secondAssistButton.hidden = YES;
+        self.assistOperationsdivideLine.hidden = YES;
+    }
+    
+    // 指示器和触摸区域
+    self.indicatorView.backgroundColor = [UIColor clearColor];
+    self.touchAreaView.backgroundColor = [UIColor clearColor];
     self.touchAreaView.delegate = self;
+    
+    // Logo
+    if ([LCUtils isIPhone6Plus] || [LCUtils isIPhoneX] || [LCUtils isIPhoneXr] ||
+        [LCUtils isIPhoneXs] || [LCUtils isIPhoneXsMax]) {
+        self.logoImageView.image = [LCAuthManager globalConfig].logoImage;
+        self.logoImageView.hidden = NO;
+        self.logoTopCons.constant = [LCUtils valueForDifferentSizeS_3_5:0
+                                                                  S_4_0:0
+                                                                  S_4_7:0
+                                                                  S_5_5:(_useBiometricsAuthButton.hidden ? 55 : 45)
+                                                                  S_5_8:60
+                                                                  S_6_1:65
+                                                                  S_6_5:(_useBiometricsAuthButton.hidden ? 90 : 95)];
+    } else {
+        self.logoImageView.image = nil;
+        self.logoImageView.hidden = YES;
+        self.logoTopCons.constant = 20;
+    }
+    
+    // 适配屏幕
+    _touchAreaCenterYCons.constant = [LCUtils valueForDifferentSizeS_3_5:-20
+                                                                   S_4_0:(_useBiometricsAuthButton.hidden ? -55 : -20)
+                                                                   S_4_7:(_useBiometricsAuthButton.hidden ? -65 : -20)
+                                                                   S_5_5:(_useBiometricsAuthButton.hidden ? -55 : -45)
+                                                                   S_5_8:(_useBiometricsAuthButton.hidden ? -55 : -45)
+                                                                   S_6_1:(_useBiometricsAuthButton.hidden ? -65 : -45)
+                                                                   S_6_5:(_useBiometricsAuthButton.hidden ? -60 : -75)];
+    
+    // 适配全面屏
+    if ([LCUtils isZeroBezel]) {
+        _otherOperateBottomCons.constant = 35;
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -109,26 +173,24 @@
             _titleLabel.text = @"验证手势密码";
             _tipLablel.text = @"请绘制手势密码";
             _closeBtn.hidden = YES;
-            _forgetBtn.enabled = YES;
-            _useOtherBtn.enabled = YES;
         }
             break;
         case LCGestureAuthViewTypeCreate:
         {
             _titleLabel.text = @"创建手势密码";
             _tipLablel.text = @"创建手势密码";
+            _useBiometricsAuthButton.hidden = YES;
+            _useBiometricsAuthLabel.hidden = YES;
             _closeBtn.hidden = NO;
-            _forgetBtn.enabled = NO;
-            _useOtherBtn.enabled = NO;
         }
             break;
         case LCGestureAuthViewTypeModify:
         {
             _titleLabel.text = @"修改手势密码";
             _tipLablel.text = @"请绘制当前密码";
+            _useBiometricsAuthButton.hidden = YES;
+            _useBiometricsAuthLabel.hidden = YES;
             _closeBtn.hidden = NO;
-            _forgetBtn.enabled = YES;
-            _useOtherBtn.enabled = YES;
         }
             break;
         case LCGestureAuthViewTypeClean:
@@ -136,8 +198,6 @@
             _titleLabel.text = @"清除手势密码";
             _tipLablel.text = @"请绘制当前密码以清除密码";
             _closeBtn.hidden = NO;
-            _forgetBtn.enabled = YES;
-            _useOtherBtn.enabled = YES;
         }
             break;
         default:
@@ -145,8 +205,6 @@
             _titleLabel.text = @"验证手势密码";
             _tipLablel.text = @"请绘制当前密码";
             _closeBtn.hidden = YES;
-            _forgetBtn.enabled = YES;
-            _useOtherBtn.enabled = YES;
         }
     }
     
@@ -534,22 +592,70 @@
 }
 
 #pragma mark - 其他操作
-- (IBAction)forgetPassword:(id)sender {
+- (IBAction)useBiometricsAuth:(id)sender {
+    LCLog(@"使用生物识别辅助验证");
+    LCBiometricsType biometricsType = [LCBiometricsAuthManager isSupportBiometricsAuth];
     
-    // 点击忘记手势密码，此时可以退出登录，使用登录密码验证等操作
-    !_forgetPasswordBlock ? : _forgetPasswordBlock(self, _lockViewType);
-    // 通知代理
-    if ([LCAuthManager delegate] && [[LCAuthManager delegate] respondsToSelector:@selector(forgetGestureWithAuthController:viewType:)]) {
-        [[LCAuthManager delegate] forgetGestureWithAuthController:self viewType:_lockViewType];
+    if (biometricsType != LCBiometricsTypeNone) {
+        
+        //初始化上下文对象
+        NSString *reason = ((biometricsType == LCBiometricsTypeTouchID) ? @"使用指纹识别辅助验证" : @"使用面容识别辅助验证");
+        NSString *fallbackTitle = ((biometricsType == LCBiometricsTypeTouchID) ? @"使用密码" : @"");
+        
+        fallbackTitle = ((biometricsType == LCBiometricsTypeTouchID) ? @"使用密码" : @"");
+        
+        __block LCGestureAuthViewType weakLockViewType = _lockViewType;
+        [LCAuthManager verifyBiometricsAuthWithReason:reason fallbackTitle:fallbackTitle Success:^(LCBiometricsAuthCheckResultType checkResultType) {
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                // 切换主线程处理
+                [self hide];
+                if ([LCAuthManager delegate] && [[LCAuthManager delegate] respondsToSelector:@selector(gestureCheckState:viewType:)]) {
+                    [[LCAuthManager delegate] gestureCheckState:LCGestureAuthViewCheckResultSuccess viewType:weakLockViewType];
+                }
+            });
+            
+        } Fail:^(LCBiometricsAuthCheckResultType checkResultType, NSError *error) {
+            
+            // 未通过
+            dispatch_async(dispatch_get_main_queue(), ^{
+                // 切换主线程处理
+                if ([LCAuthManager delegate] && [[LCAuthManager delegate] respondsToSelector:@selector(gestureCheckState:viewType:)]) {
+                    [[LCAuthManager delegate] gestureCheckState:LCGestureAuthViewCheckResultFailed viewType:weakLockViewType];
+                }
+            });
+            
+        } Fallback:^(LCBiometricsAuthCheckResultType checkResultType, NSError *error) {
+            // 未通过
+            dispatch_async(dispatch_get_main_queue(), ^{
+                // 切换主线程处理
+                if ([LCAuthManager delegate] && [[LCAuthManager delegate] respondsToSelector:@selector(gestureCheckState:viewType:)]) {
+                    [[LCAuthManager delegate] gestureCheckState:LCGestureAuthViewCheckResultCancel viewType:weakLockViewType];
+                }
+            });
+        } delegate:[LCAuthManager delegate]];
     }
 }
 
--(IBAction)useOtherAcountLogin {
-    // 主动使用其他方式登录
-    !_useOtherAcountLoginBlock ? : _useOtherAcountLoginBlock(self, _lockViewType);
+- (IBAction)firstAssistClick:(UIButton *)sender {
+    
+    LCLog(@"点击辅助操作一：%@", sender.titleLabel.text);
+    
+    !_assistOperationBlock ? : _assistOperationBlock(self, _lockViewType, 0);
     // 通知代理
-    if ([LCAuthManager delegate] && [[LCAuthManager delegate] respondsToSelector:@selector(useOtherAcountLoginWithAuthController:viewType:)]) {
-        [[LCAuthManager delegate] useOtherAcountLoginWithAuthController:self viewType:_lockViewType];
+    if ([LCAuthManager delegate] && [[LCAuthManager delegate] respondsToSelector:@selector(assistOperationWithAuthController:viewType:operationType:)]) {
+        [[LCAuthManager delegate] assistOperationWithAuthController:self viewType:_lockViewType operationType:1];
+    }
+}
+
+-(IBAction)secondAssistClick:(UIButton *)sender {
+    
+    LCLog(@"点击辅助操作二：%@", sender.titleLabel.text);
+    
+    !_assistOperationBlock ? : _assistOperationBlock(self, _lockViewType, 1);
+    // 通知代理
+    if ([LCAuthManager delegate] && [[LCAuthManager delegate] respondsToSelector:@selector(assistOperationWithAuthController:viewType:operationType:)]) {
+        [[LCAuthManager delegate] assistOperationWithAuthController:self viewType:_lockViewType operationType:0];
     }
 }
 
