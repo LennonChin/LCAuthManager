@@ -2,7 +2,7 @@
 
 LCAuthManager是一个简单易用的权限验证库，提供了手势密码、生物特性验证（包括Touch ID和Face ID）的集成。
 
-![ProjectLogo](https://github.com/LennonChin/LCAuthManager/tree/master/LCAuthManager/Images/ProjectLogo.jpg)
+![ProjectLogo](https://github.com/LennonChin/LCAuthManager/blob/master/LCAuthManager/Images/ProjectLogo.jpg)
 
 LCAuthManager有以下优点：
 
@@ -15,11 +15,11 @@ LCAuthManager有以下优点：
 
 1. 使用Face ID + 手势密码的效果：
 
-![Face ID with Gesture Password Demo](https://github.com/LennonChin/LCAuthManager/tree/master/LCAuthManager/Images/FaceIDDemo.gif)
+![Face ID with Gesture Password Demo](https://github.com/LennonChin/LCAuthManager/blob/master/LCAuthManager/Images/FaceIDDemo.gif)
 
 2. 使用Touch ID + 手势密码的效果：
 
-![Touch ID with Gesture Password Demo](https://github.com/LennonChin/LCAuthManager/tree/master/LCAuthManager/Images/TouchIDDemo.gif)
+![Touch ID with Gesture Password Demo](https://github.com/LennonChin/LCAuthManager/blob/master/LCAuthManager/Images/TouchIDDemo.gif)
 
 # 快速上手
 
