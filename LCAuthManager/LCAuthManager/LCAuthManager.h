@@ -9,11 +9,46 @@
 #import <Foundation/Foundation.h>
 #import "LCBiometricsAuthManager.h"
 #import "LCGestureAuthViewController.h"
+#import "LCBiometricsCheckError.h"
+@class LCAuthManagerConfig;
+
+@protocol LCAuthManagerDelegate <NSObject>
+
+@optional
+#pragma mark - 手势密码相关
+/** 手势密码相关，针对某种验证的验证结果 */
+- (void)gestureCheckState:(LCGestureAuthCheckResultType)checkResultType viewType:(LCGestureAuthViewType)viewType;
+/** 手势密码相关，达到最大次数代理方法 */
+- (void)gestureRetryReachMaxTimesWithAuthController:(LCGestureAuthViewController *)gestureAuthViewController viewType:(LCGestureAuthViewType)viewType;
+/** 手势密码相关，忘记手势密码的回调 */
+- (void)forgetGestureWithAuthController:(LCGestureAuthViewController *)gestureAuthViewController viewType:(LCGestureAuthViewType)viewType;
+/** 手势密码相关，使用其他账户登录的回调 */
+- (void)useOtherAcountLoginWithAuthController:(LCGestureAuthViewController *)gestureAuthViewController viewType:(LCGestureAuthViewType)viewType;
+
+#pragma mark - 生物识别相关
+/** 生物识别相关，针对某种验证的验证结果 */
+- (void)biometricsCheckState:(LCBiometricsAuthCheckResultType)checkResultType biometricsType:(LCBiometricsType)biometricsType error:(LCBiometricsCheckError *)error;
+
+#pragma mark - 密码持久化相关
+/** 查看是否设置了生物识别 */
+- (BOOL)isBiometricsAuthOpened:(LCBiometricsType)biometricsType;
+/** 生物识别相关，持久化生物识别的开启状态 */
+- (BOOL)persistBiometricsAuth:(LCBiometricsType)biometricsType isOn:(BOOL)isOn;
+/** 查看是否设置了手势密码 */
+- (BOOL)isGestureAuthOpened;
+/** 手势密码相关，持久化手势密码 */
+- (BOOL)persistGestureAuth:(NSString *)password;
+/** 加载手势密码 */
+- (NSString *)loadGestureAuth;
+@end
 
 @interface LCAuthManager : NSObject
 #pragma mark - 配置
 + (void)setGlobalConfig:(LCAuthManagerConfig *)globalConfig;
 + (LCAuthManagerConfig *)globalConfig;
+
++ (void)setDelegate:(id<LCAuthManagerDelegate>)delegate;
++ (id<LCAuthManagerDelegate>)delegate;
 
 /**
  暂时关闭验证
@@ -36,17 +71,19 @@
  @param delegate 代理
  @return 手势密码控制器
  */
-+ (LCGestureAuthViewController *)showGestureAuthViewControllerWithType:(LCGestureAuthViewType)lockViewType hostViewControllerView:(UIViewController *)hostViewController delegate:(id<LCGestureAuthCheckDelegate>)delegate;
++ (LCGestureAuthViewController *)showGestureAuthViewControllerWithType:(LCGestureAuthViewType)lockViewType hostViewControllerView:(UIViewController *)hostViewController delegate:(id<LCAuthManagerDelegate>)delegate;
+
+/** 忘记手势密码 */
++ (void)directlyforgetPassword;
 
 #pragma mark - 生物识别相关
 /** 是否支持生物识别 */
-+ (BiometricsType)isSupportBiometricsAuth;
-
-/** 更新生物识别持久化 */
-+ (void)setBiometricsAuthPersistence:(BOOL)isOn;
++ (LCBiometricsType)isSupportBiometricsAuth;
 
 /** 查看是否设置了生物识别 */
-+ (BOOL)isBiometricsAuthOpened;
++ (BOOL)isBiometricsAuthOpened:(LCBiometricsType)biometricsType;
+/** 生物识别相关，持久化生物识别的开启状态 */
++ (BOOL)persistBiometricsAuth:(LCBiometricsType)biometricsType isOn:(BOOL)isOn;
 
 /**
  使用生物识别验证
@@ -55,8 +92,13 @@
  @param fallbackTitle 验证出错后的右边按钮
  @param successBlock 成功回调Block
  @param failBlock 失败回调Block
- @param fallback 当生物识别达到最大次数时，会出现弹框，点击右侧按钮会调用该Block
+ @param fallbackBlock 当生物识别达到最大次数时，会出现弹框，点击右侧按钮会调用该Block
  */
-+ (void)verifyBiometricsAuthWithReason:(NSString *)reason fallbackTitle:(NSString *)fallbackTitle Success:(void (^)(void))successBlock Fail:(void (^)(NSError *error, LAError errorCode))failBlock Fallback:(void (^)(NSError *error, LAError errorCode))fallback;
++ (void)verifyBiometricsAuthWithReason:(NSString *)reason
+                         fallbackTitle:(NSString *)fallbackTitle
+                               Success:(void (^)(LCBiometricsAuthCheckResultType checkResultType))successBlock
+                                  Fail:(void (^)(LCBiometricsAuthCheckResultType checkResultType, NSError *error))failBlock
+                              Fallback:(void (^)(LCBiometricsAuthCheckResultType checkResultType, NSError *error))fallbackBlock
+                              delegate:(id<LCAuthManagerDelegate>)delegate;
 
 @end

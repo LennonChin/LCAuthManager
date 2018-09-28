@@ -10,6 +10,7 @@
 #import "LCGestureAuthViewController.h"
 #import "LCAuthManagerConstant.h"
 #import "LCAuthManager.h"
+#import "LCAuthManagerConfig.h"
 
 @interface LCGestureTouchArea () {
     NSMutableArray* buttonArray;

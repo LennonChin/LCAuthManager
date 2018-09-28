@@ -8,24 +8,18 @@
 
 #import <Foundation/Foundation.h>
 #import <LocalAuthentication/LocalAuthentication.h>
-@class LCAuthManagerConfig;
-
-typedef NS_ENUM(NSUInteger, BiometricsType) {
-    BiometricsTypeNone = 0,         // 不支持
-    BiometricsTypeTouchID = 1,      // Touch ID
-    BiometricsTypeFaceID = 2,       // Face ID
-};
+#import "LCAuthManagerConstant.h"
 
 @interface LCBiometricsAuthManager : NSObject
 
 /** 是否支持生物识别 */
-+ (BiometricsType)isSupportBiometricsAuth;
++ (LCBiometricsType)isSupportBiometricsAuth;
 
 /** 更新生物识别持久化 */
-+ (void)setBiometricsAuthPersistence:(BOOL)isOn;
++ (BOOL)persistBiometricsAuth:(LCBiometricsType)biometricsType isOn:(BOOL)isOn;
 
 /** 查看是否设置了生物识别 */
-+ (BOOL)isBiometricsAuthOpened;
++ (BOOL)isBiometricsAuthOpened:(LCBiometricsType)biometricsType;
 
 /**
  使用生物识别验证
@@ -36,6 +30,10 @@ typedef NS_ENUM(NSUInteger, BiometricsType) {
  @param failBlock 失败回调Block
  @param fallbackBlock 当生物识别达到最大次数时，会出现弹框，点击右fallbackBlock会调用该Block
  */
-+ (void)verifyBiometricsAuthWithReason:(NSString *)reason fallbackTitle:(NSString *)fallbackTitle Success:(void (^)(void))successBlock Fail:(void (^)(NSError *error, LAError errorCode))failBlock Fallback:(void (^)(NSError *error, LAError errorCode))fallbackBlock;
++ (void)verifyBiometricsAuthWithReason:(NSString *)reason
+                         fallbackTitle:(NSString *)fallbackTitle
+                               Success:(void (^)(LCBiometricsAuthCheckResultType checkResultType))successBlock
+                                  Fail:(void (^)(LCBiometricsAuthCheckResultType checkResultType, NSError *error))failBlock
+                              Fallback:(void (^)(LCBiometricsAuthCheckResultType checkResultType, NSError *error))fallbackBlock;
 
 @end

@@ -8,7 +8,6 @@
 //  九宫格手势解锁控件
 
 #import <UIKit/UIKit.h>
-#import "LCAuthManagerConfig.h"
 
 @protocol LCGestureTouchAreaDelegate <NSObject>
 @required

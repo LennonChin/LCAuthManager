@@ -8,12 +8,11 @@
 
 #import "LCGestureAuthViewController.h"
 #import "LCGestureAuthIndicator.h"
+#import "LCGestureTouchArea.h"
+#import "LCAuthPasswordManager.h"
 #import "LCAuthManagerConstant.h"
 #import "LCAuthManager.h"
-
-#define kTipColorNormal [OCConst ceb_redColor]
-#define kTipColorError [UIColor colorWithRed:245.0 / 255.0 green:67.0 / 255.0 blue:73.0 / 255.0 alpha:1.0]
-
+#import "LCUtils.h"
 
 @interface LCGestureAuthViewController ()<LCGestureTouchAreaDelegate>
 
@@ -33,7 +32,7 @@
 // 提示语
 @property (strong, nonatomic) IBOutlet UILabel *tipLablel;
 
-@property (strong, nonatomic) IBOutlet UIButton *tipButton; // 重设/(取消)的提示按钮
+@property (strong, nonatomic) IBOutlet UIButton *tipButton; // 重设/（取消）的提示按钮
 
 @property (nonatomic, strong) NSString* savedPassword; // 本地存储的密码
 @property (nonatomic, strong) NSString* passwordOld; // 旧密码
@@ -46,6 +45,7 @@
 @property (nonatomic, strong) NSString* tip3;
 
 // 约束，用于适配小屏
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *closeButtonTopCons;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *titleTopCons;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *tipBottomCons;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *otherOperateTopCons;
@@ -84,6 +84,8 @@
         _tipBottomCons.constant = 0;
         _otherOperateTopCons.constant = 5;
     }
+    
+    _closeButtonTopCons.constant = [LCUtils isZeroBezel] ? 45 : 30;
     
     self.indicatorView.backgroundColor = [UIColor clearColor];
     self.touchAreaView.backgroundColor = [UIColor clearColor];
@@ -156,7 +158,7 @@
     self.passwordconfirm = @"";
     
     // 本地保存的手势密码
-    self.savedPassword = [LCGestureAuthPassword loadLockPassword];
+    self.savedPassword = [LCAuthPasswordManager loadGesturePassword];
     LCLog(@"本地保存的密码是：%@", self.savedPassword);
     
     [self updateTipButtonStatus];
@@ -175,14 +177,14 @@
             
         } else if (_lockViewType == LCGestureAuthViewTypeClean) { // 清除密码
 
-            [LCGestureAuthPassword saveLockPassword:nil];
+            [LCAuthPasswordManager persistGesturePassword:nil];
             
             [self hide];
             
             // 通知代理
-            if (_delegate && [_delegate respondsToSelector:@selector(checkState:viewType:)]) {
+            if ([LCAuthManager delegate] && [[LCAuthManager delegate] respondsToSelector:@selector(gestureCheckState:viewType:)]) {
                 
-                [_delegate checkState:LCGestureAuthViewCheckResultSuccess viewType:_lockViewType];
+                [[LCAuthManager delegate] gestureCheckState:LCGestureAuthViewCheckResultSuccess viewType:_lockViewType];
                 
             }
             
@@ -191,8 +193,8 @@
             [self hide];
             
             // 通知代理
-            if (_delegate && [_delegate respondsToSelector:@selector(checkState:viewType:)]) {
-                [_delegate checkState:LCGestureAuthViewCheckResultSuccess viewType:_lockViewType];
+            if ([LCAuthManager delegate] && [[LCAuthManager delegate] respondsToSelector:@selector(gestureCheckState:viewType:)]) {
+                [[LCAuthManager delegate] gestureCheckState:LCGestureAuthViewCheckResultSuccess viewType:_lockViewType];
             }
         }
         
@@ -217,8 +219,8 @@
             // 输错超过最大次数，这里该做一些如强制退出重设密码等操作
             !_reachMaxRetryTimesBlock ? : _reachMaxRetryTimesBlock(self, _lockViewType);
             // 通知代理
-            if (_delegate && [_delegate respondsToSelector:@selector(reachMaxRetryTimesWithAuthController:viewType:)]) {
-                [_delegate reachMaxRetryTimesWithAuthController:self viewType:_lockViewType];
+            if ([LCAuthManager delegate] && [[LCAuthManager delegate] respondsToSelector:@selector(gestureRetryReachMaxTimesWithAuthController:viewType:)]) {
+                [[LCAuthManager delegate] gestureRetryReachMaxTimesWithAuthController:self viewType:_lockViewType];
             }
         }
         
@@ -226,8 +228,7 @@
     
 }
 
-- (void)createPassword:(NSString*)string
-{
+- (void)createPassword:(NSString*)string {
     
     // 输入密码
     if ([self.passwordNew isEqualToString:@""] && [self.passwordconfirm isEqualToString:@""]) {
@@ -247,11 +248,11 @@
             // 成功
             LCLog(@"两次密码一致");
             
-            [LCGestureAuthPassword saveLockPassword:string];
+            [LCAuthPasswordManager persistGesturePassword:string];
             
-            if (_delegate && [_delegate respondsToSelector:@selector(checkState:viewType:)]) {
+            if ([LCAuthManager delegate] && [[LCAuthManager delegate] respondsToSelector:@selector(gestureCheckState:viewType:)]) {
                 
-                [_delegate checkState:LCGestureAuthViewCheckResultSuccess viewType:_lockViewType];
+                [[LCAuthManager delegate] gestureCheckState:LCGestureAuthViewCheckResultSuccess viewType:_lockViewType];
                 
             }
             
@@ -270,8 +271,7 @@
 }
 
 #pragma mark - 显示提示
-- (void)setTip:(NSString*)tip
-{
+- (void)setTip:(NSString*)tip {
     [_tipLablel setText:tip];
     [_tipLablel setTextColor:[LCAuthManager globalConfig].normalTipColor];
     
@@ -284,20 +284,18 @@
 }
 
 // 错误
-- (void)setErrorTip:(NSString*)tip errorPswd:(NSString*)string
-{
+- (void)setErrorTip:(NSString*)tip errorPswd:(NSString*)string {
     // 显示错误点点
     [self.touchAreaView showErrorCircles:string];
     
     [_tipLablel setText:tip];
-    [_tipLablel setTextColor:kTipColorError];
+    [_tipLablel setTextColor:[LCAuthManager globalConfig].errorTipColor];
     
     [self shakeAnimationForView:_tipLablel];
 }
 
 #pragma mark 新建/修改后保存
-- (void)updateTipButtonStatus
-{
+- (void)updateTipButtonStatus {
     LCLog(@"重设TipButton");
     if ((_lockViewType == LCGestureAuthViewTypeCreate ||
          _lockViewType == LCGestureAuthViewTypeModify) &&
@@ -315,8 +313,7 @@
 }
 
 #pragma mark - 成功后返回
-- (void)hide
-{
+- (void)hide {
     switch (_lockViewType) {
             
         case LCGestureAuthViewTypeCheck:
@@ -325,7 +322,7 @@
             break;
         case LCGestureAuthViewTypeCreate:
         {
-            [LCGestureAuthPassword saveLockPassword:self.passwordNew];
+            [LCAuthPasswordManager persistGesturePassword:self.passwordNew];
         }
             break;
         case LCGestureAuthViewTypeModify:
@@ -333,12 +330,12 @@
             if ([self.passwordconfirm isEqualToString:@""]) {
                 
                 // 表示未完成修改，将不做操作
-                [LCGestureAuthPassword saveLockPassword:self.savedPassword];
+                [LCAuthPasswordManager persistGesturePassword:self.savedPassword];
                 
             } else {
                 
                 // 表示已完成修改，存储密码
-                [LCGestureAuthPassword saveLockPassword:self.passwordconfirm];
+                [LCAuthPasswordManager persistGesturePassword:self.passwordconfirm];
                 
             }
             
@@ -346,12 +343,12 @@
             break;
         case LCGestureAuthViewTypeClean:
         {
-            [LCGestureAuthPassword saveLockPassword:nil];
+            [LCAuthPasswordManager persistGesturePassword:nil];
         }
             break;
         default:
         {
-            [LCGestureAuthPassword saveLockPassword:nil];
+            [LCAuthPasswordManager persistGesturePassword:nil];
         }
     }
     
@@ -376,14 +373,13 @@
 }
 
 #pragma mark - delegate 每次划完手势后
-- (void)lockString:(NSString *)string
-{
-    LCLog(@"这次的密码=--->%@<---", string);
+- (void)lockString:(NSString *)string {
+    LCLog(@"这次的密码[%@]", string);
     
     // 更新指示圆点
     [self.indicatorView setPasswordString:string];
     
-    if (string.length < 4) {
+    if (string.length < [LCAuthManager globalConfig].gesturePasswordMinLength) {
         
         [self setTip:@"最少绘制4位密码，请重新绘制"];
         return;
@@ -439,8 +435,7 @@
 #pragma mark - 解锁动画
 // 截屏，用于动画
 #ifdef LCGestureAuthAnimationOn
-- (UIImage *)imageFromView:(UIView *)theView
-{
+- (UIImage *)imageFromView:(UIView *)theView {
     UIGraphicsBeginImageContext(theView.frame.size);
     CGContextRef context = UIGraphicsGetCurrentContext();
     [theView.layer renderInContext:context];
@@ -450,20 +445,18 @@
 }
 
 // 上一界面截图
-- (void)capturePreSnap
-{
+- (void)capturePreSnap {
     self.preSnapImageView.hidden = YES; // 默认是隐藏的
     self.preSnapImageView.image = [self imageFromView:self.presentingViewController.view];
 }
 
 // 当前界面截图
-- (void)captureCurrentSnap
-{
+- (void)captureCurrentSnap {
     self.currentSnapImageView.hidden = YES; // 默认是隐藏的
     self.currentSnapImageView.image = [self imageFromView:self.view];
 }
 
-- (void)animateUnlock{
+- (void)animateUnlock {
     
     self.currentSnapImageView.hidden = NO;
     self.preSnapImageView.hidden = NO;
@@ -507,16 +500,14 @@
     [self.preSnapImageView.layer addAnimation:animationGroup forKey:nil];
 }
 
-- (void)animationDidStop:(CAAnimation *)anim finished:(BOOL)flag
-{
+- (void)animationDidStop:(CAAnimation *)anim finished:(BOOL)flag {
     self.currentSnapImageView.hidden = YES;
     [self dismissViewControllerAnimated:NO completion:nil];
 }
 #endif
 
 #pragma mark 抖动动画
-- (void)shakeAnimationForView:(UIView *)view
-{
+- (void)shakeAnimationForView:(UIView *)view {
     CALayer *viewLayer = view.layer;
     CGPoint position = viewLayer.position;
     CGPoint left = CGPointMake(position.x - 8, position.y);
@@ -533,22 +524,7 @@
     [viewLayer addAnimation:animation forKey:nil];
 }
 
-#pragma mark - 提示信息
-- (void)showAlert:(NSString*)string
-{
-    UIAlertView* alert = [[UIAlertView alloc] initWithTitle:nil
-                                                    message:string
-                                                   delegate:nil
-                                          cancelButtonTitle:nil otherButtonTitles:@"确定", nil];
-    [alert show];
-}
-
-
-- (void)gotoLogin:(void(^)(NSInteger state))block{
-    
-}
-
--(void)reset{
+- (void)reset {
     
     self.passwordNew = @"";
     self.passwordconfirm = @"";
@@ -558,21 +534,13 @@
 }
 
 #pragma mark - 其他操作
-- (void)directlyforgotPassword {
-    [self forgetPassword:nil];
-}
-
-- (void)directlyUseOtherAcountLogin {
-    [self useOtherAcountLogin];
-}
-
 - (IBAction)forgetPassword:(id)sender {
     
     // 点击忘记手势密码，此时可以退出登录，使用登录密码验证等操作
     !_forgetPasswordBlock ? : _forgetPasswordBlock(self, _lockViewType);
     // 通知代理
-    if (_delegate && [_delegate respondsToSelector:@selector(forgetPasswordWithAuthController:viewType:)]) {
-        [_delegate forgetPasswordWithAuthController:self viewType:_lockViewType];
+    if ([LCAuthManager delegate] && [[LCAuthManager delegate] respondsToSelector:@selector(forgetGestureWithAuthController:viewType:)]) {
+        [[LCAuthManager delegate] forgetGestureWithAuthController:self viewType:_lockViewType];
     }
 }
 
@@ -580,8 +548,8 @@
     // 主动使用其他方式登录
     !_useOtherAcountLoginBlock ? : _useOtherAcountLoginBlock(self, _lockViewType);
     // 通知代理
-    if (_delegate && [_delegate respondsToSelector:@selector(useOtherAcountLoginWithAuthController:viewType:)]) {
-        [_delegate useOtherAcountLoginWithAuthController:self viewType:_lockViewType];
+    if ([LCAuthManager delegate] && [[LCAuthManager delegate] respondsToSelector:@selector(useOtherAcountLoginWithAuthController:viewType:)]) {
+        [[LCAuthManager delegate] useOtherAcountLoginWithAuthController:self viewType:_lockViewType];
     }
 }
 
@@ -589,8 +557,8 @@
     
     __weak typeof(self)weakSelf = self;
     [self dismissViewControllerAnimated:YES completion:^{
-        if (weakSelf.delegate && [weakSelf.delegate respondsToSelector:@selector(checkState:viewType:)]) {
-            [weakSelf.delegate checkState:LCGestureAuthViewCheckResultCancel viewType:weakSelf.lockViewType];
+        if ([LCAuthManager delegate] && [[LCAuthManager delegate] respondsToSelector:@selector(gestureCheckState:viewType:)]) {
+            [[LCAuthManager delegate] gestureCheckState:LCGestureAuthViewCheckResultCancel viewType:weakSelf.lockViewType];
         }
     }];
 }
@@ -602,7 +570,7 @@
 
 - (void)dealloc {
     
-    LCLog(@"================> %s", __FUNCTION__);
+    LCLog(@"%s", __FUNCTION__);
     
 }
 
@@ -625,5 +593,4 @@
     
     return UIInterfaceOrientationPortrait;
 }
-
 @end

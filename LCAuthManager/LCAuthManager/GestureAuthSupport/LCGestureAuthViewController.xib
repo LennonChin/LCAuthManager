@@ -12,6 +12,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LCGestureAuthViewController">
             <connections>
                 <outlet property="closeBtn" destination="d4q-Rj-m85" id="2TY-mD-YEg"/>
+                <outlet property="closeButtonTopCons" destination="vOA-hr-la4" id="WBg-wC-ruv"/>
                 <outlet property="forgetBtn" destination="XZC-bF-sjO" id="TKP-1q-btQ"/>
                 <outlet property="indicatorView" destination="Mxk-aH-Tds" id="IUa-U7-0Yh"/>
                 <outlet property="otherOperateTopCons" destination="vgN-wL-ui7" id="kKr-sf-lJG"/>

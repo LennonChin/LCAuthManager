@@ -7,17 +7,29 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "LCAuthManager.h"
 
 @interface LCAuthManagerConfig : NSObject
 /** 本地持久化的字典名称 */
 @property (nonatomic, strong) NSString *persistenceName;
-- (void)setPersistenceValue:(NSObject *)value forKey:(NSString *)key;
-- (NSObject *)getPersistenceValueForKey:(NSString *)key;
+
+/** 代理 */
+@property (nonatomic, weak) id<LCAuthManagerDelegate> delegate;
+
+/**
+ * 是否自己处理凭证的保存
+ *
+ * 该框架中，凭证的存储是直接存储在用户配置中的，且是明文存储，
+ * 所以并不建议将直接用于安全性要求较高的环境中，
+ * 用户可以通过将该选项置为YES，并实现规定的代理方法，自己处理凭证的存储，
+ * 框架将自动使用代理方法进行凭证的读取和持久化
+ */
+@property (nonatomic, assign) BOOL keepAuthentication;
 
 #pragma mark - 手势密码相关配置
 #pragma mark 密码配置
 /** 手势密码最短长度 */
-@property (nonatomic, assign) NSInteger passwordMinLength;
+@property (nonatomic, assign) NSInteger gesturePasswordMinLength;
 /** 最大重试次数 */
 @property (nonatomic, assign) NSInteger maxGestureRetryTimes;
 

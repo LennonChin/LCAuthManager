@@ -9,7 +9,7 @@
 #import "AppDelegate.h"
 #import "LCAuthManager.h"
 
-@interface AppDelegate ()
+@interface AppDelegate ()<LCAuthManagerDelegate>
 
 @end
 
@@ -18,6 +18,8 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    [self.window makeKeyAndVisible];
+    // 一定要在visible之后
     [self checkAuth];
     return YES;
 }
@@ -57,20 +59,22 @@
     // 手势密码
     LCGestureAuthViewController *gestureAuthViewController = nil;
     if ([LCAuthManager isGestureAuthOpened]) {
-        gestureAuthViewController = [LCAuthManager showGestureAuthViewControllerWithType:LCGestureAuthViewTypeCheck hostViewControllerView:self.window.rootViewController delegate:nil];
+        UINavigationController *rootViewController = (UINavigationController *)self.window.rootViewController;
+        gestureAuthViewController = [LCAuthManager showGestureAuthViewControllerWithType:LCGestureAuthViewTypeCheck hostViewControllerView:rootViewController.topViewController delegate:self];
     }
     
     // 生物识别
-    if ([LCAuthManager isBiometricsAuthOpened]) {
+    if ([LCAuthManager isBiometricsAuthOpened:LCBiometricsTypeUnknown]) {
         // 开始验证生物识别
-        NSString *reason = (([LCBiometricsAuthManager isSupportBiometricsAuth] == BiometricsTypeTouchID) ? @"按压您的指纹以解锁" : @"验证您的面容以解锁");
+        NSString *reason = (([LCBiometricsAuthManager isSupportBiometricsAuth] == LCBiometricsTypeTouchID) ? @"按压您的指纹以解锁" : @"验证您的面容以解锁");
         
-        [LCBiometricsAuthManager verifyBiometricsAuthWithReason:reason fallbackTitle:@"使用手势密码" Success:^{
+        [LCAuthManager verifyBiometricsAuthWithReason:reason fallbackTitle:@"使用手势密码" Success:^(LCBiometricsAuthCheckResultType checkResultType) {
+            
             
             // 需要切到主线程处理，当网页弹出键盘时，切出APP再切入，在子线程处理会引发崩溃
             dispatch_async(dispatch_get_main_queue(), ^{
-                
-                if (gestureAuthViewController != nil && self.window.rootViewController.presentedViewController == gestureAuthViewController) {
+                UINavigationController *rootViewController = (UINavigationController *)self.window.rootViewController;
+                if (gestureAuthViewController != nil && rootViewController.topViewController.presentedViewController == gestureAuthViewController) {
                     
                     // 跳过手势密码的验证
                     [gestureAuthViewController cancelCheck];
@@ -78,7 +82,7 @@
                 
             });
             
-        } Fail:^(NSError *error, LAError errorCode) {
+        } Fail:^(LCBiometricsAuthCheckResultType checkResultType, NSError *error) {
             
             NSLog(@"AppDelegate evaluatePolicy Error: %@", error);
             
@@ -107,11 +111,35 @@
                 }
             }
             
-        } Fallback:^(NSError *error, LAError errorCode) {
+        } Fallback:^(LCBiometricsAuthCheckResultType checkResultType, NSError *error) {
             
-        }];
+        } delegate:self];
         
     }
 }
 
+#pragma mark - 代理方法
+- (void)gestureRetryReachMaxTimesWithAuthController:(LCGestureAuthViewController *)gestureAuthViewController viewType:(LCGestureAuthViewType)viewType {
+    
+    [self showAlert:@"达到最大次数"];
+}
+
+- (void)forgetGestureWithAuthController:(LCGestureAuthViewController *)gestureAuthViewController viewType:(LCGestureAuthViewType)viewType {
+    
+    [self showAlert:@"点击了忘记手势密码"];
+}
+
+- (void)useOtherAcountLoginWithAuthController:(LCGestureAuthViewController *)gestureAuthViewController viewType:(LCGestureAuthViewType)viewType {
+    
+    [self showAlert:@"使用其他账户登录"];
+}
+
+#pragma mark - 提示信息
+- (void)showAlert:(NSString*)string {
+    UIAlertView* alert = [[UIAlertView alloc] initWithTitle:nil
+                                                    message:string
+                                                   delegate:nil
+                                          cancelButtonTitle:nil otherButtonTitles:@"确定", nil];
+    [alert show];
+}
 @end
