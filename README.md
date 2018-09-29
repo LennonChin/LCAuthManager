@@ -80,10 +80,10 @@ if(window.rootViewController.presentingViewController == nil){
         } else if (checkResultType == LCGestureAuthViewCheckResultFailed) {
             [self showAlert:@"创建手势密码失败"];
         } else if (checkResultType == LCGestureAuthViewCheckResultCancel) {
-            
+
             [self showAlert:@"取消创建手势密码"];
         }
-        
+
     }
 }
 ```
@@ -106,7 +106,13 @@ if ([LCAuthManager isGestureAuthOpened]) {
 
 1. 引入本项目
 
-目前仓库并未提交CocoaPods托管，你可以选择手动引入。克隆本项目到本地，将项目主目录下的LCAuthManager文件夹拖入工程，在需要使用的地方引入`#import "LCAuthManager.h`头文件即可。
+- 使用CocoaPods；LCAuthManager已支持CocoaPods导入，请在你的Podfile中添加以下内容并更新项目依赖：
+
+```
+pod 'LCAuthManager'
+```
+
+- 或者可以选择手动引入。克隆本项目到本地，将项目主目录下的LCAuthManager文件夹拖入工程，在需要使用的地方引入`#import "LCAuthManager.h`头文件即可。
 
 2. 了解项目配置和代理：
 
@@ -189,7 +195,7 @@ iOS中生物特性识别包括TouchID和FaceID，这两种验证方式对外暴�
 ```objective-c
 /**
  使用生物识别验证
- 
+
  @param reason 显示的理由
  @param fallbackTitle 验证出错后的右边按钮
  @param successBlock 成功回调Block
