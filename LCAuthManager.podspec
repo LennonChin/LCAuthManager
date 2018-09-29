@@ -10,13 +10,12 @@ Pod::Spec.new do |s|
                    4. The project provides a common demo that can help developers integrate quickly.
                    DESC
   s.homepage     = "https://github.com/LennonChin/LCAuthManager"
-  s.screenshots  = "https://github.com/LennonChin/LCAuthManager/blob/master/LCAuthManager/Images/FaceIDDemo.gif", "https://github.com/LennonChin/LCAuthManager/blob/master/LCAuthManager/Images/TouchIDDemo.gif"
   s.license      = "MIT"
   s.author             = { "LennonChin" => "i@coderap.com" }
   s.social_media_url   = "https://blog.coderap.com/"
   s.platform     = :ios, "8.0"
   s.source       = { :git => "https://github.com/LennonChin/LCAuthManager.git", :tag => s.version }
   s.source_files = "LCAuthManager/LCAuthManager/**/*.{h,m}"
-  s.resource  = "LCAuthManager/LCAuthManager/Resources/LCAuthManager.bundle"
+  s.resource  = "LCAuthManager/LCAuthManager/**/*.{xib}", "LCAuthManager/LCAuthManager/Resources/LCAuthManager.bundle"
   s.requires_arc = true
 end
